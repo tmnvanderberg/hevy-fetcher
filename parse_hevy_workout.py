@@ -1,4 +1,9 @@
 import csv
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import requests
 
 def fetch_hevy_workouts_page(api_key, page=1, page_size=5):
@@ -43,7 +48,9 @@ def write_exercises_to_csv(workouts, filename="exercises.csv"):
                     ])
 
 if __name__ == "__main__":
-    api_key = "63c4c89d-82c4-4ced-847a-9747cf33a012"
+    api_key = os.environ.get("HEVY_API_KEY")
+    if not api_key:
+        raise RuntimeError("Please set the HEVY_API_KEY environment variable.")
     try:
         workouts = fetch_hevy_workouts_page(api_key, page=1, page_size=5)
         from pprint import pprint
