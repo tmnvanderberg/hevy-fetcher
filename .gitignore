@@ -1,1 +1,5 @@
 .env
+env.sh
+output
+__pycache__/
+*.pyc
